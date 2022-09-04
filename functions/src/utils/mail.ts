@@ -90,7 +90,10 @@ const sendWelcomeEmail = async (data: IRegistrationArgs) => {
 <br/>
 ${paymentDetails}
 <br/>
-<div style="padding: 32px 0;text-align: center;"><img src="https://firebasestorage.googleapis.com/v0/b/patca-aprm.appspot.com/o/patca-logo-long.png?alt=media&token=d6e56134-7412-4f5c-8005-6df22de3ca06" alt="PATCA logo" height="32px"/></div>
+<div style="padding: 32px 0;text-align: center;">
+  <img src="https://firebasestorage.googleapis.com/v0/b/patca-aprm.appspot.com/o/IFATCA-LOGO-2-hk.jpg?alt=media&token=e3d6646e-639a-419c-aad8-86a41b1454a8" alt="APRM 2022" height="56px"/>
+  <img src="https://firebasestorage.googleapis.com/v0/b/patca-aprm.appspot.com/o/patca-logo-long.jpg?alt=media&token=11ebfbe1-bcf4-4f08-9289-358788ee7b0f" alt="PATCA logo" height="32px" style="padding:0 0 6px 20px;"/>
+</div>
 </div>
   `;
 

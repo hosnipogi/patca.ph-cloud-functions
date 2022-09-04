@@ -91,4 +91,3 @@ export const sendMailAndUpdateSheetOnCreate = functions.firestore
 
     return true;
   });
-
