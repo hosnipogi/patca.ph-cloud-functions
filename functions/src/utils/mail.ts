@@ -1,8 +1,5 @@
 import { createTransport, SendMailOptions } from "nodemailer";
-import * as functions from "firebase-functions";
-import { FirebaseConfig } from "../types/enums";
-// import * as hbs from "nodemailer-express-handlebars";
-// import { create } from "express-handlebars";
+import { IRegistrationArgs } from "../types";
 
 const gmailEmail = process.env.PATCA_EMAIL!;
 const gmailPassword = process.env.PATCA_EMAIL_PASSWORD!;
@@ -20,19 +17,8 @@ const regFee = {
 
 const APP_NAME = "IFATCA APRM 2022";
 
-const sendEmail = functions.firestore
-  .document(`${FirebaseConfig.COLLECTION_NAME}/{userId}`)
-  .onCreate((snap, context) => {
-    const data = snap.data();
-    const id = snap.id;
-
-    sendWelcomeEmail(id, data);
-
-    return;
-  });
-
-async function sendWelcomeEmail(id: string, data: any) {
-  const { methodOfPayment, email, fullname, memberAssoc } = data;
+const sendWelcomeEmail = async (data: IRegistrationArgs) => {
+  const { methodOfPayment, email, fullname, memberAssoc, id } = data;
 
   const mailTransport = createTransport({
     service: "gmail",
@@ -116,12 +102,9 @@ ${paymentDetails}
   };
 
   await mailTransport.sendMail(mailOptions);
-  functions.logger.log("New welcome email sent to:", email);
 
   return null;
-}
-
-export default sendEmail;
+};
 
 function searchCat(atca: string) {
   const found = ATCAs.find((atc) => atc.atca === atca);
@@ -209,3 +192,5 @@ export const ATCAs = [
     category: 1,
   },
 ];
+
+export default sendWelcomeEmail;
