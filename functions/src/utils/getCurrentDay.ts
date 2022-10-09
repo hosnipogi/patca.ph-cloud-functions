@@ -5,14 +5,14 @@ export default function () {
   const day2 = new Date("October 11, 2022").getTime() - phTimeZone;
   const day3 = new Date("October 12, 2022").getTime() - phTimeZone;
 
-  if (date > day1 && date < day2) {
-    return 1;
+  if (date > day3) {
+    return 3;
   }
   if (date > day2) {
     return 2;
   }
-  if (date > day3) {
-    return 3;
+  if (date > day1 && date < day2) {
+    return 1;
   }
 
   return 0;

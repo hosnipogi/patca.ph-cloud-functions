@@ -1,6 +1,11 @@
 import { https, logger } from "firebase-functions";
 import { FirebaseConfig } from "../../types/enums";
-import { db, corsHandler, throwOnInvalidAuth } from "../../utils";
+import {
+  db,
+  corsHandler,
+  throwOnInvalidAuth,
+  updateGoogleSheet,
+} from "../../utils";
 
 export default https.onRequest((request, response) => {
   corsHandler(request, response, async () => {
@@ -26,6 +31,11 @@ export default https.onRequest((request, response) => {
       });
 
       logger.info(`Updated souvenirs - ${id}`, res);
+
+      const gsheetResponse = await updateGoogleSheet(id, "souvenir");
+      if (gsheetResponse !== 200)
+        throw new Error(`GSheet attendance error - ${id}`);
+
       response.send("Updated Received Souvenir - SUCCESS");
     } catch (error) {
       logger.error("Search user error", (error as Error).message);

@@ -1,6 +1,11 @@
 import { https, logger } from "firebase-functions";
 import { FirebaseConfig } from "../../types/enums";
-import { db, corsHandler, throwOnInvalidAuth } from "../../utils";
+import {
+  db,
+  corsHandler,
+  throwOnInvalidAuth,
+  updateGoogleSheet,
+} from "../../utils";
 import getCurrentDay from "../../utils/getCurrentDay";
 
 export default https.onRequest((request, response) => {
@@ -29,6 +34,10 @@ export default https.onRequest((request, response) => {
       });
 
       logger.info(`Updated attendance day${dayNum} - ${id}`, res);
+
+      const gsheetResponse = await updateGoogleSheet(id, "attendance");
+      if (gsheetResponse !== 200)
+        throw new Error(`GSheet attendance error - ${id}`);
 
       response.send({ message: "Successfully updated attendance", dayNum });
     } catch (error) {
