@@ -46,30 +46,6 @@ export const isUnregisteredEmail = functions.https.onRequest(
   }
 );
 
-export const searchUser = functions.https.onRequest(
-  async (request, response) => {
-    try {
-      if (request.headers.authorization !== `Bearer ${AUTH_KEY}`)
-        throw new Error("Unauthorized Access");
-      const id = request.query.id;
-
-      if (!id) throw new Error("ID Not found");
-
-      const query = await db
-        .collection(FirebaseConfig.COLLECTION_NAME)
-        .doc(String(id))
-        .get();
-
-      response.send(query);
-    } catch (error) {
-      functions.logger.error("Search user error", (error as Error).message);
-      response.status(401).send((error as Error).message);
-    }
-
-    return;
-  }
-);
-
 export const sendMailAndUpdateSheetOnCreate = functions.firestore
   .document(`${FirebaseConfig.COLLECTION_NAME}/{userId}`)
   .onCreate((snap) => {
@@ -91,3 +67,10 @@ export const sendMailAndUpdateSheetOnCreate = functions.firestore
 
     return true;
   });
+
+export {
+  onUpdateAttendance,
+  onSearchUser,
+  onUpdatePaymentStatus,
+  onUpdateReceivedSouvenir,
+} from "./triggers/ifatca";
