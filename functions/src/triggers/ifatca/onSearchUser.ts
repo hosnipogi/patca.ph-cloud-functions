@@ -22,7 +22,7 @@ export default https.onRequest((request, response) => {
       const data = query.data();
       response.send(data);
     } catch (error) {
-      logger.error("Search user error", (error as Error).message);
+      logger.error("Search user error:", (error as Error).message);
       response.status(401).send((error as Error).message);
     }
     return;

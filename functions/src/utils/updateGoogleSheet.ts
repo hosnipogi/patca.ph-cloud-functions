@@ -23,7 +23,7 @@ const updateGoogleSheet = async (
 
   const client = await auth.getClient();
   const googleSheets = google.sheets({ version: "v4", auth: client });
-  const spreadsheetId = "12tl1B-wQ6Cu9q4LDZxGsM184ItaGNy57AeqzpzR7RxQ";
+  const spreadsheetId = process.env.SPREADSHEET_ID!;
 
   const request = {
     auth,
@@ -47,7 +47,10 @@ const updateGoogleSheet = async (
   const values = parentValues[0] as string[];
 
   let row = values.findIndex((id) => id === memberId);
-  if (row < 0) throw new Error("Member id Not found");
+  if (row < 0)
+    throw new Error(
+      `From update google sheets: Member id ${memberId} Not found`
+    );
 
   row = row + 1; // 1 index
   let response;

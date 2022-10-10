@@ -38,7 +38,7 @@ export default https.onRequest((request, response) => {
 
       response.send("Payment update SUCCESS");
     } catch (error) {
-      logger.error("Search user error", (error as Error).message);
+      logger.error("Update payment error:", (error as Error).message);
       response.status(401).send((error as Error).message);
     }
     return;

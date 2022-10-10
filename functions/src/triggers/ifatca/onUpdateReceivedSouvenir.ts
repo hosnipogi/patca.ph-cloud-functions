@@ -38,7 +38,7 @@ export default https.onRequest((request, response) => {
 
       response.send("Updated Received Souvenir - SUCCESS");
     } catch (error) {
-      logger.error("Search user error", (error as Error).message);
+      logger.error("Update received souvenir error:", (error as Error).message);
       response.status(401).send((error as Error).message);
     }
     return;
