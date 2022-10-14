@@ -1,5 +1,5 @@
 import { google } from "googleapis";
-import getCurrentDay from "./getCurrentDay";
+import failOnInvalidEventDay from "./failOnInvalidEventDay";
 
 enum SpreadSheetColumn {
   IS_PAID = "P",
@@ -13,8 +13,7 @@ const updateGoogleSheet = async (
   memberId: string,
   updateMethod: "payment" | "attendance" | "souvenir"
 ) => {
-  const d = getCurrentDay();
-  if (!d) throw new Error("Error updating google sheet, event not yet live");
+  const d = failOnInvalidEventDay();
 
   const auth = new google.auth.GoogleAuth({
     keyFile: "./credentials.json",

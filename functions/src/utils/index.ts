@@ -1,7 +1,12 @@
 import * as admin from "firebase-admin";
 
-const app = admin.initializeApp();
+const app = admin.initializeApp({
+  projectId: "patca-aprm",
+});
 export const db = app.firestore();
+db.settings({
+  ignoreUndefinedProperties: true,
+});
 export { default as sendMail } from "./mail";
 export { default as addMemberToGoogleSheet } from "./addMemberToGoogleSheet";
 export { default as corsHandler } from "./corsHandler";

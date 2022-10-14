@@ -68,9 +68,5 @@ export const sendMailAndUpdateSheetOnCreate = functions.firestore
     return true;
   });
 
-export {
-  onUpdateAttendance,
-  onSearchUser,
-  onUpdatePaymentStatus,
-  onUpdateReceivedSouvenir,
-} from "./triggers/ifatca";
+export * from "./triggers/ifatca";
+// export * from "./triggers/patca";
