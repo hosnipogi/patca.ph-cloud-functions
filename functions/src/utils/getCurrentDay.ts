@@ -2,7 +2,7 @@ export default function () {
   const phTimeZone = 8 * 60 * 60 * 1000;
   const date = Date.now();
 
-  const sequencedDay = 14;
+  const sequencedDay = 12;
 
   const day0 = new Date(`October ${sequencedDay}, 2022`).getTime() - phTimeZone;
   const day1 =

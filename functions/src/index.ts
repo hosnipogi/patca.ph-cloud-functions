@@ -69,4 +69,4 @@ export const sendMailAndUpdateSheetOnCreate = functions.firestore
   });
 
 export * from "./triggers/ifatca";
-// export * from "./triggers/patca";
+export * from "./triggers/patca";
